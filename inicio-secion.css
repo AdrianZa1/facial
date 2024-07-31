@@ -9,7 +9,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('../inicio-secion/image/inicio.jpg');
+    background-image: url('./image/inicio.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
