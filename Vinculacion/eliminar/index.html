@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('BUSCARF.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        form label {
+            margin-bottom: 5px;
+        }
+
+        form input, form select, form button {
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        button.delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button.delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Administración de Usuarios</h1>
+
+        <form id="addUserForm" onsubmit="return addUser(event);">
+            <label for="correo_electronico">Correo Electrónico:</label>
+            <input type="email" id="correo_electronico" name="correo_electronico" required>
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required>
+
+            <label for="role">Rol:</label>
+            <select id="role" name="role" required>
+                <option value="admin">Administrador</option>
+                <option value="secretaria">Secretaria</option>
+                <option value="registrador">Registrador</option>
+                <option value="usuario_normal">Usuario Normal</option>
+            </select>
+
+            <label for="rol_adicional">Rol Adicional:</label>
+            <select id="rol_adicional" name="rol_adicional">
+                <option value="ninguno">Ninguno</option>
+                <option value="admin">Administrador</option>
+                <option value="secretaria">Secretaria</option>
+                <option value="registrador">Registrador</option>
+                <option value="usuario_normal">Usuario Normal</option>
+            </select>
+
+            <button type="submit">Agregar Usuario</button>
+        </form>
+
+        <h2>Lista de Usuarios</h2>
+        <table id="userList">
+            <thead>
+                <tr>
+                    <th>Correo Electrónico</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                    <th>Rol Adicional</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se cargarán los usuarios mediante AJAX -->
+            </tbody>
+        </table> 
+        <a href="../pagina-principal/index.html" class="button">Regresar</a>
+    </div>
+
+    <script>
+        function addUser(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('addUserForm');
+            const formData = new FormData(form);
+
+            fetch('../php/add_user.php?action=add', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                loadUsers();
+                form.reset();
+            });
+
+            return false;
+        }
+
+        function loadUsers() {
+            fetch('../php/add_user.php?action=list')
+                .then(response => response.json())
+                .then(data => {
+                    const userList = document.getElementById('userList').getElementsByTagName('tbody')[0];
+                    userList.innerHTML = '';
+
+                    data.forEach(user => {
+                        const userRow = document.createElement('tr');
+                        userRow.innerHTML = `
+                            <td>${user.correo_electronico}</td>
+                            <td>${user.role}</td>
+                            <td>
+                                <button class="delete-btn" onclick="deleteUser('${user.correo_electronico}')">Eliminar</button>
+                            </td>
+                            <td>
+                                <select onchange="updateRole('${user.correo_electronico}', this.value)">
+                                    <option value="ninguno" ${user.rol_adicional === 'ninguno' ? 'selected' : ''}>Ninguno</option>
+                                    <option value="admin" ${user.rol_adicional === 'admin' ? 'selected' : ''}>Administrador</option>
+                                    <option value="secretaria" ${user.rol_adicional === 'secretaria' ? 'selected' : ''}>Secretaria</option>
+                                    <option value="registrador" ${user.rol_adicional === 'registrador' ? 'selected' : ''}>Registrador</option>
+                                    <option value="usuario_normal" ${user.rol_adicional === 'usuario_normal' ? 'selected' : ''}>Usuario Normal</option>
+                                </select>
+                            </td>
+                        `;
+                        userList.appendChild(userRow);
+                    });
+                });
+        }
+
+        function deleteUser(correo_electronico) {
+            fetch('../php/add_user.php?action=delete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `correo_electronico=${correo_electronico}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                loadUsers();
+            });
+        }
+
+        function updateRole(correo_electronico, newRole) {
+            fetch('../php/add_user.php?action=update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `correo_electronico=${correo_electronico}&rol_adicional=${newRole}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                loadUsers();
+            });
+        }
+
+        window.onload = loadUsers;
+    </script>
+</body>
+</html>

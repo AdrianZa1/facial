@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="BUSCAR.CSS">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <div id="logoContainer">
+      <img src="image/logo.png" alt="Logo de BEAUTYCLINIC" id="logo">
+      <h1 id="nombreEmpresa">BEAUTYCLINIC</h1>
+    </div>
+    <div id="infoContacto">
+      <p id="numeroTelefono">Tel: +593-98-68-73165</p>
+      <button id="botonEntrar" onclick="irAEntrar()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      <button id="botonMenu" onclick="toggleMenu()"><i class="fas fa-bars"></i> Menú</button>
+    </div>
+  </header>
+
+  <form id="formularioBusqueda" onsubmit="buscarPaciente(); return false;">
+    <h1>Buscar paciente</h1>
+    <label for="historial">Ingrese el nombre de paciente:</label>
+    <input type="text" id="historial" name="consulta" placeholder="Introduzca el nombre del paciente">
+    <span id="errorMensaje" style="color: red;"></span>
+    <br>
+    <input type="submit" value="Buscar">
+    <input type="button" value="Regresar" onclick="regreso()">
+  </form>
+
+  <div id="resultadosBusqueda">
+    <table id="tablaResultados">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Diagnóstico</th>
+          <th>Tratamiento Realizado</th>
+          <th>Indicaciones</th>
+          <th>Próxima Cita</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí se mostrarán los resultados de la búsqueda -->
+      </tbody>
+    </table>
+   <div id="menuDesplegable">
+    <button id="cerrarMenu" onclick="toggleMenu()">&times;</button>
+    <ul>
+      <li><a href="../pagina-principal/index.html">Inicio</a></li>
+      <li><a href="../eliminar/index.html">Usuarios</a></li>
+      <li><a href="../vinculacion 2.0/formulario.html">Registro de paciente</a></li>
+      <li><a href="../BUSCAR/BUSCAR.HTML">Consulta de paciente</a></li>
+      <li><a href="../registro_consulta/formulario2.html">Registro de consulta</a></li>
+      <!-- Agrega más opciones según sea necesario -->
+    </ul>
+  </div>
+
+  <script src="BUSCAR.JS"></script>
+  <script src="buscarpa.js"></script>
+  <script>
+    function buscarPaciente() {
+      // Obtener el valor ingresado por el usuario
+      var nombrePaciente = document.getElementById("historial").value;
+
+      // Realizar la petición AJAX para obtener los resultados de la búsqueda
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            try {
+              // Intentar parsear los datos JSON recibidos
+              var resultados = JSON.parse(xhr.responseText);
+
+              // Limpiar la tabla antes de mostrar nuevos resultados
+              var tbody = document.getElementById("tablaResultados").getElementsByTagName("tbody")[0];
+              tbody.innerHTML = "";
+
+              // Iterar sobre los resultados y agregar filas a la tabla
+              // Iterar sobre los resultados y agregar filas a la tabla
+              for (var i = 0; i < resultados.length; i++) {
+                var fila = tbody.insertRow(i);
+                fila.insertCell(0).innerHTML = resultados[i].Nombre;
+                fila.insertCell(1).innerHTML = resultados[i].Apellido;
+                fila.insertCell(2).innerHTML = resultados[i].Diagnostico;
+                fila.insertCell(3).innerHTML = resultados[i].Tratamiento_realizado;
+                fila.insertCell(4).innerHTML = resultados[i].Indicaciones;
+                fila.insertCell(5).innerHTML = resultados[i].proxima_cita;
+              }
+
+            } catch (error) {
+              console.error("Error al parsear JSON:", error);
+              console.log("Respuesta completa:", xhr.responseText);
+              // Puedes manejar el error de parsing aquí
+            }
+
+          } else {
+            console.error("Error en la petición: ", xhr.status);
+            // Puedes manejar el error de la petición aquí
+          }
+        }
+      };
+
+      // Realizar la petición GET al archivo PHP con el nombre del paciente como parámetro
+      xhr.open("GET", "../php/buscar_paciente.php?nombre=" + encodeURIComponent(nombrePaciente), true);
+      xhr.send();
+      return false; // Evitar la recarga de la página
+    }
+
+  </script>
+
+</body>
+
+</html>

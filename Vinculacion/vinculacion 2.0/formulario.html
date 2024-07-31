@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style-formulario.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>Historia Clinica</title>
+</head>
+
+<body>
+  <header>
+    <div id="logoContainer">
+      <img src="image/logo.png" alt="Logo de BEAUTYCLINIC" id="logo">
+      <h1 id="nombreEmpresa">BEAUTYCLINIC</h1>
+    </div>
+    <div id="infoContacto">
+      <p id="numeroTelefono">Tel: +593-98-68-73165</p>
+      <button id="botonEntrar" onclick="irAEntrar()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      <button id="botonMenu" onclick="toggleMenu()"><i class="fas fa-bars"></i> Menú</button>
+    </div>
+  </header>
+
+  <div class="card-container">
+    <div class="card">
+      <form action="../php/archivo_master.php" method="post">
+        <div>
+          <h1>Historia Clinica del Paciente</h1>
+        </div>
+        <div id="datos-paciente">
+          <label for="paciente">Nombre del Paciente:</label>
+          <input type="text" id="paciente" name="nombre" required><br>
+
+          <label for="paciente">Apellidos del Paciente:</label>
+          <input type="text" id="paciente" name="apellido" required><br>
+
+          <label for="sexo">Sexo:</label>
+          <input type="text" id="sexo" name="sexo" required>
+
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" name="direccion" required>
+
+          <label for="edad">Edad:</label>
+          <input type="number" id="edad" name="edad" min="0" required><br>
+
+          <label for="ocupacion">Ocupación:</label>
+          <input type="text" id="ocupacion" name="ocupacion" required><br>
+
+          <label for="n-historia">Cedula:</label>
+          <input type="number" id="n-historia" name="cedula" min="0" oninput="validateCedula()"required><br>
+        </div><br>
+
+        <div id="motivo-consulta">
+          <label for="detalle-consulta">Motivo de Consulta:</label>
+          <textarea id="detalle-consulta" name="detalle-consulta" rows="1" required></textarea>
+        </div><br>
+
+        <div id="problema-actual">
+          <label for="detalle-problema">Enfermedad o Problema actual:</label>
+          <textarea id="detalle-problema" name="detalle-problema" rows="3" required></textarea>
+        </div><br>
+
+        <div>
+          <h3>Antecedentes Personales y Familiares</h3>
+        </div>
+
+        <div id="antecedentes">
+          <label for="antecedentes-medicos">Enfermedad:</label>
+          <select id="antecedentes-medicos" name="antecedentes-medicos">
+            <option value="alergia1">ALERGIA ANTIBIÓTICOS</option>
+            <option value="alergia2">ALERGIA ANESTESIA</option>
+            <option value="enfermedad1">HEMORRAGIAS</option>
+            <option value="enfermedad2">VIH/SIDA</option>
+            <option value="enfermedad3">TUBERCULOSIS</option>
+            <option value="enfermedad4">ASMA</option>
+            <option value="enfermedad5">DIABETES</option>
+            <option value="enfermedad6">HIPERTENSIÓN</option>
+            <option value="enfermedad7">ENF CARDIACA</option>
+            <option value="enfermedad8">OTRO</option>
+          </select>
+        </div>
+
+        <div>
+          <h2>Signos Vitales</h2>
+        </div>
+
+        <div id="signos-vitales">
+          <label for="signo1">Presion Arterial:</label>
+          <input type="text" id="signo1" name="signo1" min="50" max="300"  required><label> /mmHg</label><br>
+          <label for="signo2">Frecuencia Cardiaca:</label>
+          <input type="number" id="signo2" name="signo2" min="4S" max="70"  required><label> x min</label><br>
+          <label for="signo3">Temperatura:</label>
+          <input type="number" id="signo3" name="signo3" min="25" max="50"  required><label> ºC</label><br>
+          <label for="signo4">Frecuencia Respiratoria:</label>
+          <input type="number" id="signo4" name="signo4" min="8" max="20"  required><label> x min</label><br>
+
+        </div><br>
+        <button type="submit" onclick="confirmacion">Enviar Consulta</button>
+      </form>
+
+      <script>
+        function irAEntrar() {
+          // Reemplaza 'tu_pagina_de_entrada.html' con la URL deseada para la página de entrada
+          window.location.href = '../inicio-secion/index.html';
+        }
+
+        function toggleMenu() {
+          var menuDesplegable = document.getElementById('menuDesplegable');
+          menuDesplegable.classList.toggle('visible');
+        }
+      </script>
+    </div>
+    <div id="menuDesplegable">
+      <button id="cerrarMenu" onclick="toggleMenu()">&times;</button>
+      <ul>
+        <li><a href="../pagina-principal/index.html">Inicio</a></li>
+        <li><a href="../eliminar/index.html">Usuarios</a></li>
+        <li><a href="../vinculacion 2.0/formulario.html">Registro de paciente</a></li>
+        <li><a href="../BUSCAR/BUSCAR.HTML">Consulta de paciente</a></li>
+        <li><a href="../registro_consulta/formulario2.html">Registro de consulta</a></li>
+        <!-- Agrega más opciones según sea necesario -->
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

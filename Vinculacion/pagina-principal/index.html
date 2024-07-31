@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consultorio Odontológico - Inicio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <header>
+    <div id="logoContainer">
+      <img src="image/logo.png" alt="Logo de BEAUTYCLINIC" id="logo">
+      <h1 id="nombreEmpresa">BEAUTYCLINIC</h1>
+    </div>
+    <div id="infoContacto">
+      <p id="numeroTelefono">Tel: +593-98-68-73165</p>
+      <button id="botonEntrar" onclick="irAEntrar()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+      <button id="botonMenu" onclick="toggleMenu()"><i class="fas fa-bars"></i> Menú</button>
+    </div>
+  </header>
+
+  <div id="inicio">
+    <h1>DALIA MURILLO</h1>
+    <h1>CONSULTORIO DENTAL</h1>
+    <p>Una razón más para sonreir</p>
+  </div>
+
+  <div id="menuDesplegable">
+    <button id="cerrarMenu" onclick="toggleMenu()">&times;</button>
+    <ul>
+      <li><a href="../pagina-principal/index.html">Inicio</a></li>
+      <li><a href="../eliminar/index.html">Usuarios</a></li>
+      <li><a href="../vinculacion 2.0/formulario.html">Registro de paciente</a></li>
+      <li><a href="../BUSCAR/BUSCAR.HTML">Consulta de paciente</a></li>
+      <li><a href="../registro_consulta/formulario2.html">Registro de consulta</a></li>
+      <!-- Agrega más opciones según sea necesario -->
+    </ul>
+  </div>
+
+  <script src="javah.js"></script>
+</body>
+
+</html>
