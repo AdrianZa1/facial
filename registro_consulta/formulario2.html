@@ -28,35 +28,35 @@
     <div class="card">
       <form action="../php/registro_consulta.php" method="post">
         <h1>Registro de consulta</h1>
-        
+
         <label for="pacienteNombre">Nombre del Paciente:</label>
         <input type="text" id="pacienteNombre" name="Nombre" required>
-        
+
         <label for="pacienteApellido">Apellidos del Paciente:</label>
         <input type="text" id="pacienteApellido" name="Apellido" required><br>
-        
+
         <label for="fecha_consulta">Fecha de consulta:</label>
         <input type="date" id="fecha_consulta" name="fecha_consulta" required>
-        
+
         <label for="hora_consulta">Hora de consulta:</label>
         <input type="time" id="hora_consulta" name="hora_consulta" required><br>
-        
+
         <label for="detalle-consulta">Diagnóstico y Complicaciones:</label>
-        <textarea id="detalle-consulta" name="Diagnostico"  required></textarea>
-        
+        <textarea id="detalle-consulta" name="Diagnostico" required></textarea>
+
         <label for="detalle-consulta">Tratamiento Realizado:</label>
         <textarea id="detalle-consulta" name="Tratamiento_realizado" required></textarea>
-        
+
         <label for="detalle-consulta">Indicaciones:</label>
         <textarea id="detalle-consulta" name="Indicaciones" required></textarea>
-        
+
         <label for="fecha_proxima_cita">Próxima cita:</label>
         <input type="date" id="fecha_proxima_cita" name="Proxima_cita" required>
-        
-        <script src="validaconsulta.js"></script><br>
+
+
         <button type="submit2">Enviar</button><br>
-    </form>
-    
+      </form>
+
       <div id="menuDesplegable">
         <button id="cerrarMenu" onclick="toggleMenu()">&times;</button>
         <ul>
@@ -68,10 +68,16 @@
           <!-- Agrega más opciones según sea necesario -->
         </ul>
       </div>
-
-      
     </div>
   </div>
+  <script src="validaconsulta.js"></script>
+  <script>
+    function irAEntrar() {
+      // Cambia la URL a la que deseas redirigir
+      window.location.href = "../index.html";
+    }
+
+  </script>
 </body>
 
 </html>

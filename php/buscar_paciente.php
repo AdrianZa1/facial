@@ -5,7 +5,7 @@
  include('funcion.php');
 
  // Verificar que el usuario tenga permiso para buscar pacientes
- checkRole(['admin', 'secretaria', 'medico']);
+ checkRoles(['admin', 'secretaria', 'medico']);
  include('conexion.php');
 
 // Verificar la conexión

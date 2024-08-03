@@ -26,7 +26,7 @@ if ($resultado && $resultado->num_rows > 0) {
     $_SESSION['rol_adicional'] = $rol_adicional;
 
     // Redirige a la interfaz correspondiente según el tipo de usuario
-    if ($tipo_usuario == 'usuario_normal') {
+    if ($tipo_usuario == 'usuario_normal'&& $rol_adicional == 'ninguno') {
         header('Location: https://zamoraadrian117.wixsite.com/clinic-orofacial');
     } else {
         header('Location: ../pagina-principal/index.html');

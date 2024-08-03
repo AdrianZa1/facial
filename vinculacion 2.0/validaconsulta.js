@@ -24,7 +24,7 @@ function regreso(){
   }
   function irAEntrar() {
     // Reemplaza 'tu_pagina_de_entrada.html' con la URL deseada para la página de entrada
-    window.location.href = '../inicio-secion/index.html';
+    window.location.href = '../index.html';
   }
 
   function toggleMenu() {

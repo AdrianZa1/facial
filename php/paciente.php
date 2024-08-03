@@ -19,7 +19,7 @@ $stmt->bind_param('ss', $correo_electronico, $contrasena);
 // Ejecutar la consulta
 if ($stmt->execute()) {
     // Redirigir al usuario a la página de inicio de sesión u otra página con un mensaje de éxito
-    header('Location: ../inicio-secion/index.html');
+    header('Location: ../index.html');
     exit();
 } else {
     // Ocurrió un error al insertar en la base de datos, puedes redirigir al usuario a la página de registro con un mensaje de error

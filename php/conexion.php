@@ -1,10 +1,9 @@
 <?php
 // Configuración de la base de datos
-$servername = "fdb1030.awardspace.net";
-$username = "4511777_orofacial";
-$password = "adrian1@";
-$database = "4511777_orofacial";
-
+$servername = "sql313.infinityfree.com";  // Nombre de host MySQL
+$username = "si0_37017205";               // Nombre de usuario MySQL
+$password = "qawsedrf@1";              // Contraseña MySQL (tu contraseña de vPanel)
+$database = "if0_37017205_oro_facial"; 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $database);
 
