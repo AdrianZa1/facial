@@ -1,9 +1,9 @@
 <?php
 // Configuración de la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "oroo-facial";
+$servername = "fdb1030.awardspace.net";
+$username = "4511777_orofacial";
+$password = "adrian1@";
+$database = "4511777_orofacial";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $database);
